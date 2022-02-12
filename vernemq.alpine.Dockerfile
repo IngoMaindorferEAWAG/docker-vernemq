@@ -31,6 +31,8 @@ RUN ARCH=`uname -m` && \
     echo "ARCH=$ARCH" && \
     if [[ $ARCH == "arm"* ]]; then \
         TARGET="rpi32" ; \
+    elif [ "$ARCH" == "aarch64" ]; then \
+        TARGET="rpi32" ; \
     else \
         TARGET="rel" ; \
     fi && \
