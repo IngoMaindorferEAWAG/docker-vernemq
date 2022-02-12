@@ -16,7 +16,7 @@ RUN apk --no-cache --update --available upgrade && \
         git bash curl wget jq ca-certificates \
         build-base autoconf cmake openssl-dev \
         bsd-compat-headers ncurses-libs libstdc++ snappy-dev \
-	&& \
+    && \
     git clone -b $VERNEMQ_VERSION $VERNEMQ_REPO .
 	
 RUN wget https://github.com/vernemq/docker-vernemq/raw/$VERNEMQ_VERSION/bin/build.sh -O build.sh && \
@@ -37,7 +37,7 @@ RUN ARCH=`uname -m` && \
         TARGET="rel" ; \
     fi && \
 	echo "TARGET=$TARGET" && \
-	\
+    \
     ./build.sh $TARGET
 
 ## Image ##
