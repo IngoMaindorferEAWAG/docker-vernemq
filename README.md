@@ -1,5 +1,5 @@
 # docker-vernemq
-VerneMQ for amd64 (x86_64) and ARM (Raspberry Pi) based on AlpineLinux
+VerneMQ for amd64 (x86_64) and ARM (Raspberry Pi)
 
 more see:
 * https://github.com/vernemq/docker-vernemq
@@ -9,11 +9,15 @@ more see:
 
 Images:
 * https://github.com/Tob1asDocker/docker-vernemq/pkgs/container/docker-vernemq
-  * `docker pull ghcr.io/tob1asdocker/docker-vernemq:latest-alpine`
-  * `docker pull ghcr.io/tob1asdocker/docker-vernemq:VERSION-alpine`
+  * `docker pull ghcr.io/tob1asdocker/docker-vernemq:latest-alpine` (AlpineLinux)
+  * `docker pull ghcr.io/tob1asdocker/docker-vernemq:VERSION-alpine` (AlpineLinux)
+  * `docker pull ghcr.io/tob1asdocker/docker-vernemq:latest` (Debian)
+  * `docker pull ghcr.io/tob1asdocker/docker-vernemq:VERSION` (Debian)
 * https://hub.docker.com/r/tobi312/vernemq
-  * `docker pull tobi312/vernemq:latest-alpine`
-  * `docker pull tobi312/vernemq:VERSION-alpine`
+  * `docker pull tobi312/vernemq:latest-alpine` (AlpineLinux)
+  * `docker pull tobi312/vernemq:VERSION-alpine` (AlpineLinux)
+  * `docker pull tobi312/vernemq:latest` (Debian)
+  * `docker pull tobi312/vernemq:VERSION` (Debian)
 * build yourself:
   * `docker build -t local/vernemq:1.12.3-alpine --build-arg VERNEMQ_VERSION="1.12.3" -f vernemq.alpine.Dockerfile .`  
   (Version must exists in repository [vernemq/docker-vernemq](https://github.com/vernemq/docker-vernemq) and [vernemq/vernemq](https://github.com/vernemq/vernemq) as branch/tag!)
