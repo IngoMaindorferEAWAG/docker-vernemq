@@ -14,8 +14,8 @@ RUN apt-get update && \
     apt-get -y install \
 	    git bash curl wget jq ca-certificates \
 	    build-essential autoconf cmake libssl-dev \
-		libsnappy-dev \
-	&& \
+	    libsnappy-dev \
+    && \
     git clone -b $VERNEMQ_VERSION $VERNEMQ_REPO .
 
 RUN wget https://github.com/vernemq/docker-vernemq/raw/$VERNEMQ_VERSION/bin/build.sh -O build.sh && \
