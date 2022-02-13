@@ -1,5 +1,5 @@
 # docker-vernemq
-VerneMQ for amd64 (x86_64) and ARM (Raspberry Pi)
+VerneMQ for amd64 (x86_64) and ARM32 (Raspberry Pi)
 
 more see:
 * https://github.com/vernemq/docker-vernemq
