@@ -19,5 +19,25 @@ Images:
   * `docker pull tobi312/vernemq:latest` (Debian)
   * `docker pull tobi312/vernemq:VERSION` (Debian)
 * build yourself:
-  * `docker build -t local/vernemq:1.12.3-alpine --build-arg VERNEMQ_VERSION="1.12.3" -f vernemq.alpine.Dockerfile .`  
-  (Version must exists in repository [vernemq/docker-vernemq](https://github.com/vernemq/docker-vernemq) and [vernemq/vernemq](https://github.com/vernemq/vernemq) as branch/tag!)
+  * Docker:  
+    ```sh
+    # git clone and then:
+    docker build -t local/vernemq:latest-alpine --build-arg VERNEMQ_VERSION="1.12.3" -f vernemq.alpine.Dockerfile .
+    # or (without git clone)
+    docker build -t local/vernemq:latest-alpine --build-arg VERNEMQ_VERSION="1.12.3" https://github.com/Tob1asDocker/docker-vernemq/raw/main/vernemq.alpine.Dockerfile
+    ```  
+  * Docker-Compose:  
+    ```yml
+    version: '2.4'
+    services:
+      vernemq:
+        build: 
+          context: https://github.com/Tob1asDocker/docker-vernemq/raw/main/vernemq.alpine.Dockerfile
+          args:
+            VERNEMQ_VERSION: "1.12.3"
+        image: local/vernemq:latest-alpine
+        container_name: vernemq
+        restart: unless-stopped
+        # more settings ...
+    ``` 
+  * Note: Version must exists in repository [vernemq/docker-vernemq](https://github.com/vernemq/docker-vernemq) and [vernemq/vernemq](https://github.com/vernemq/vernemq) as branch/tag!
