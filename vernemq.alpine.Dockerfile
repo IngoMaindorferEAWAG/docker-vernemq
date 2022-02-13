@@ -4,7 +4,6 @@ ARG VERNEMQ_VERSION="1.12.3"
 
 FROM erlang:22-alpine AS build-env
 ARG VERNEMQ_VERSION
-ARG VERNEMQ_REPO=https://github.com/vernemq/vernemq.git
 
 SHELL ["/bin/sh", "-euxo", "pipefail", "-c"]
 
@@ -17,7 +16,7 @@ RUN apk --no-cache --update --available upgrade && \
         build-base autoconf cmake openssl-dev \
         bsd-compat-headers ncurses-libs libstdc++ snappy-dev \
     && \
-    git clone -b $VERNEMQ_VERSION $VERNEMQ_REPO .
+    git clone -b $VERNEMQ_VERSION https://github.com/vernemq/vernemq.git .
 	
 RUN wget https://github.com/vernemq/docker-vernemq/raw/$VERNEMQ_VERSION/bin/build.sh -O build.sh && \
     wget https://github.com/vernemq/docker-vernemq/raw/$VERNEMQ_VERSION/bin/vernemq.sh -O vernemq.sh && \

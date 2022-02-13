@@ -4,7 +4,6 @@ ARG VERNEMQ_VERSION="1.12.3"
 
 FROM erlang:22 AS build-env
 ARG VERNEMQ_VERSION
-ARG VERNEMQ_REPO=https://github.com/vernemq/vernemq.git
 
 SHELL ["/bin/bash", "-euxo", "pipefail", "-c"]
 
@@ -16,7 +15,7 @@ RUN apt-get update && \
 	    build-essential autoconf cmake libssl-dev \
 	    libsnappy-dev \
     && \
-    git clone -b $VERNEMQ_VERSION $VERNEMQ_REPO .
+    git clone -b $VERNEMQ_VERSION https://github.com/vernemq/vernemq.git .
 
 RUN wget https://github.com/vernemq/docker-vernemq/raw/$VERNEMQ_VERSION/bin/build.sh -O build.sh && \
     wget https://github.com/vernemq/docker-vernemq/raw/$VERNEMQ_VERSION/bin/vernemq.sh -O vernemq.sh && \
