@@ -35,7 +35,7 @@ RUN ARCH=`uname -m` && \
     else \
         TARGET="rel" ; \
     fi && \
-	echo "TARGET=$TARGET" && \
+    echo "TARGET=$TARGET" && \
     \
     ./build.sh $TARGET
 
