@@ -1,23 +1,26 @@
 # docker-vernemq
 **VerneMQ** for amd64 (x86_64) and ARM32 (Raspberry Pi)
 
-more see:
+VerneMQ is a MQTT message broker, developed in Erlang.
+
+### Docs
+
+* https://docs.vernemq.com/
+  * https://docs.vernemq.com/installing-vernemq/docker
+  * https://github.com/vernemq/vmq-docs/blob/master/configuration/the-vernemq-conf-file.md  
+   (use prefix "DOCKER_VERNEMQ_" and then key=value in docker command or docker-compose file)
+  * https://github.com/vernemq/vmq-docs/blob/master/configuration/file-auth.md
 * https://github.com/vernemq/docker-vernemq
 * https://github.com/vernemq/vernemq
-* https://docs.vernemq.com/installing-vernemq/docker
-* https://docs.vernemq.com/configuring-vernemq/the-vernemq-conf-file (or on [GitHub](https://github.com/vernemq/vmq-docs/blob/1.12.3/configuration/the-vernemq-conf-file.md)) (use prefix "DOCKER_VERNEMQ_" and then key=value in docker command or docker-compose file)
 
-Images:
+### Images / Build
+
 * https://github.com/Tob1asDocker/docker-vernemq/pkgs/container/docker-vernemq
-  * `docker pull ghcr.io/tob1asdocker/docker-vernemq:latest-alpine` (AlpineLinux)
-  * `docker pull ghcr.io/tob1asdocker/docker-vernemq:VERSION-alpine` (AlpineLinux)
-  * `docker pull ghcr.io/tob1asdocker/docker-vernemq:latest` (Debian)
-  * `docker pull ghcr.io/tob1asdocker/docker-vernemq:VERSION` (Debian)
+  * `docker pull ghcr.io/tob1asdocker/docker-vernemq:latest-alpine` | `:VERSION-alpine` (AlpineLinux)
+  * `docker pull ghcr.io/tob1asdocker/docker-vernemq:latest` | `:VERSION` (Debian)
 * https://hub.docker.com/r/tobi312/vernemq
-  * `docker pull tobi312/vernemq:latest-alpine` (AlpineLinux)
-  * `docker pull tobi312/vernemq:VERSION-alpine` (AlpineLinux)
-  * `docker pull tobi312/vernemq:latest` (Debian)
-  * `docker pull tobi312/vernemq:VERSION` (Debian)
+  * `docker pull tobi312/vernemq:latest-alpine` | `:VERSION-alpine` (AlpineLinux)
+  * `docker pull tobi312/vernemq:latest` | `:VERSION` (Debian)
 * build yourself:
   * Docker:  
     ```sh
@@ -41,3 +44,11 @@ Images:
         # more settings ...
     ``` 
   * Note: Version must exists in repository [vernemq/docker-vernemq](https://github.com/vernemq/docker-vernemq) and [vernemq/vernemq](https://github.com/vernemq/vernemq) as branch/tag!
+
+### Example
+
+see example-folder!
+
+### This Image on
+* [DockerHub](https://hub.docker.com/r/tobi312/vernemq)
+* [GitHub](https://github.com/Tob1asDocker/docker-vernemq)
