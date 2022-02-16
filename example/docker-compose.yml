@@ -1,0 +1,110 @@
+version: '2.4'
+services:
+
+  # VerneMQ - MQTT Broker
+  # https://vernemq.com/
+  # https://github.com/vernemq/vernemq
+  # https://github.com/vernemq/docker-vernemq
+  # https://github.com/Tob1asDocker/docker-vernemq
+  # Help:
+  # * https://docs.vernemq.com/
+  # * https://github.com/vernemq/docker-vernemq#vernemq-configuration
+  # * https://github.com/vernemq/vmq-docs/blob/master/configuration/the-vernemq-conf-file.md
+  # * https://github.com/vernemq/vmq-docs/blob/master/configuration/file-auth.md
+  #   * docker exec -it vernemq vmq-passwd /etc/vernemq/vmq.passwd user
+  #   * ./vernemq-config/vmq.passwd with example users and password=passw0rd 
+  # * https://github.com/vernemq/vernemq/issues/1594#issuecomment-671370692
+  # fix permission problem before startup: "mkdir ./vernemq-data && chmod 777 ./vernemq-data"
+  # Version tested: 1.12.3
+  vernemq:
+    image: vernemq/vernemq:latest-alpine   # Supported architectures: amd64
+    #image: tobi312/vernemq:latest-alpine  # Supported architectures: amd64, arm32 (RaspberryPi)
+    container_name: vernemq
+    #hostname: vernemq
+    restart: unless-stopped
+    ports:
+      - '1883:1883/tcp'    # mqtt
+      - '8883:8883/tcp'    # mqtts
+      #- '8888:9000/tcp'   # http
+      #- '8889:8889/tcp'   # https
+      #- '18883:44053/tcp' # Cluster
+      #- '18884:18884/tcp' # Cluster SSL
+    volumes:
+      - ./vernemq-data:/vernemq/data:rw
+      - ./vernemq-config/vmq.passwd:/vernemq/etc/vmq.passwd:rw
+      - ./vernemq-config/vmq.acl:/vernemq/etc/vmq.acl:ro
+      - ./vernemq-config/cacerts.pem:/vernemq/etc/cacerts.pem:ro
+      - ./vernemq-config/cert.pem:/vernemq/etc/cert.pem:ro
+      - ./vernemq-config/key.pem:/vernemq/etc/key.pem:ro
+    environment:
+      - "DOCKER_VERNEMQ_ACCEPT_EULA=yes"
+      - "DOCKER_VERNEMQ_log.console.level=debug" # debug | info | warning | error
+      - "DOCKER_VERNEMQ_allow_anonymous=off"     # "on" only for testing/development
+      - "DOCKER_VERNEMQ_plugins.vmq_passwd=on"
+      - "DOCKER_VERNEMQ_vmq_passwd.password_file=./etc/vmq.passwd"
+      - "DOCKER_VERNEMQ_vmq_passwd.password_reload_interval=60" # 0 for disable
+      - "DOCKER_VERNEMQ_plugins.vmq_acl=on"
+      - "DOCKER_VERNEMQ_vmq_acl.acl_file=./etc/vmq.acl"
+      - "DOCKER_VERNEMQ_vmq_acl.acl_reload_interval=60" # 0 for disable
+      # CLUSTER
+      #- "DOCKER_VERNEMQ_nodename=VerneMQ@127.0.0.1" # don't work ?
+      - "DOCKER_VERNEMQ_metadata_plugin=vmq_plumtree" # 'vmq_plumtree' for existing and 'vmq_swc' for new cluster deployments
+      #- "DOCKER_VERNEMQ_allow_register_during_netsplit=on"
+      #- "DOCKER_VERNEMQ_allow_publish_during_netsplit=on"
+      #- "DOCKER_VERNEMQ_allow_subscribe_during_netsplit=on"
+      #- "DOCKER_VERNEMQ_allow_unsubscribe_during_netsplit=on"
+      #- "DOCKER_VERNEMQ_coordinate_registrations=on"
+      #- "DOCKER_VERNEMQ_listener.vmq.clustering=0.0.0.0:44053"
+      ##- "DOCKER_VERNEMQ_listener.vmq.clustering=0.0.0.0:18883"
+      #- "DOCKER_VERNEMQ_listener.vmqs.clustering=0.0.0.0:18884"
+      #- "DOCKER_VERNEMQ_listener.vmqs.cafile=./etc/cacerts.pem"
+      #- "DOCKER_VERNEMQ_listener.vmqs.certfile=./etc/cert.pem"
+      #- "DOCKER_VERNEMQ_listener.vmqs.keyfile=./etc/key.pem"
+      #- "DOCKER_VERNEMQ_listener.vmqs.ciphers=ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384"
+      ##- "DOCKER_VERNEMQ_listener.vmqs.eccs=[brainpoolP384r1,secp384r1,sect283k1]"
+      #- "DOCKER_VERNEMQ_listener.vmqs.tls_version=tlsv1.2"
+      #- "DOCKER_VERNEMQ_distributed_cookie=vmq"
+      ##- "DOCKER_VERNEMQ_DISCOVERY_NODE=<IP-OF-VERNEMQ1>"
+      # WEBSOCKET
+      #- "DOCKER_VERNEMQ_listener.ws.default=0.0.0.0:9001"
+      #- "DOCKER_VERNEMQ_listener.wss.default=0.0.0.0:9002"
+      # MQTT
+      - "DOCKER_VERNEMQ_listener.tcp.default=0.0.0.0:1883"
+      - "DOCKER_VERNEMQ_listener.tcp.allowed_protocol_versions=3,4,5,131"
+      # MQTTS
+      - "DOCKER_VERNEMQ_listener.ssl.default=0.0.0.0:8883"
+      - "DOCKER_VERNEMQ_listener.ssl.allowed_protocol_versions=3,4,5,131"
+      - "DOCKER_VERNEMQ_listener.ssl.cafile=./etc/cacerts.pem"
+      - "DOCKER_VERNEMQ_listener.ssl.certfile=./etc/cert.pem"
+      - "DOCKER_VERNEMQ_listener.ssl.keyfile=./etc/key.pem"
+      - "DOCKER_VERNEMQ_listener.ssl.ciphers=ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384"
+      #- "DOCKER_VERNEMQ_listener.ssl.eccs=[brainpoolP384r1,secp384r1,sect283k1]"
+      - "DOCKER_VERNEMQ_listener.ssl.tls_version=tlsv1.2"
+      # HTTP
+      - "DOCKER_VERNEMQ_listener.http.default=0.0.0.0:9000" # 8888 not working / blocked ?
+      # HTTPS
+      - "DOCKER_VERNEMQ_listener.https.default=0.0.0.0:8889"
+      - "DOCKER_VERNEMQ_listener.https.cafile=./etc/cacerts.pem"
+      - "DOCKER_VERNEMQ_listener.https.certfile=./etc/cert.pem"
+      - "DOCKER_VERNEMQ_listener.https.keyfile=./etc/key.pem"
+      - "DOCKER_VERNEMQ_listener.https.ciphers=ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384"
+      #- "DOCKER_VERNEMQ_listener.https.eccs=[brainpoolP384r1,secp384r1,sect283k1]"
+      - "DOCKER_VERNEMQ_listener.https.tls_version=tlsv1.2"
+      # BRIDGE MODE (Server and Client) (replace ssl.br0 with tcp.br0 for no ssl connection)
+      #- "DOCKER_VERNEMQ_plugins.vmq_bridge=off"
+      ##- "DOCKER_VERNEMQ_vmq_bridge.tcp.br0=mqtt.example.com:1883"
+      #- "DOCKER_VERNEMQ_vmq_bridge.ssl.br0=mqtt.example.com:8883"
+      #- "DOCKER_VERNEMQ_vmq_bridge.ssl.br0.cleansession=off"
+      #- "DOCKER_VERNEMQ_vmq_bridge.ssl.br0.client_id=auto"
+      #- "DOCKER_VERNEMQ_vmq_bridge.ssl.br0.keepalive_interval=60"
+      #- "DOCKER_VERNEMQ_vmq_bridge.ssl.br0.username=bridge"
+      #- "DOCKER_VERNEMQ_vmq_bridge.ssl.br0.password=passw0rd"
+      #- "DOCKER_VERNEMQ_vmq_bridge.ssl.br0.topic.1=* out 1"  # use 'in', 'out' or 'both'
+      #- "DOCKER_VERNEMQ_vmq_bridge.ssl.br0.mqtt_version=3"
+      #- "DOCKER_VERNEMQ_vmq_bridge.ssl.br0.max_outgoing_buffered_messages=1000"
+      ##- "DOCKER_VERNEMQ_vmq_bridge.ssl.br0.capath=/etc/ssl/certs"
+      #- "DOCKER_VERNEMQ_vmq_bridge.ssl.br0.cafile=./etc/cacerts.pem"
+      ##- "DOCKER_VERNEMQ_vmq_bridge.ssl.br0.certfile=./etc/cert.pem"
+      ##- "DOCKER_VERNEMQ_vmq_bridge.ssl.br0.keyfile=./etc/key.pem"
+      #- "DOCKER_VERNEMQ_vmq_bridge.ssl.br0.insecure=off"
+      #- "DOCKER_VERNEMQ_vmq_bridge.ssl.br0.tls_version=tlsv1.2"
