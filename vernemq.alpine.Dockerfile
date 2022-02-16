@@ -30,10 +30,11 @@ RUN ARCH=`uname -m` && \
     echo "ARCH=$ARCH" && \
     if [[ $ARCH == "arm"* ]]; then \
         TARGET="rpi32" ; \
-    elif [ "$ARCH" == "aarch64" ]; then \
-        TARGET="rpi32" ; \
-    else \
+    elif [ "$ARCH" == "x86_64" ]; then \
         TARGET="rel" ; \
+    else \
+        echo "This architecture is (unfortunately) not supported!" && \
+        exit 1 ; \
     fi && \
     echo "TARGET=$TARGET" && \
     \
