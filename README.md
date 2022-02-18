@@ -53,7 +53,7 @@ Clients for publishing/subscribing:
 * mosquitto-clients: [mosquitto_pub](https://mosquitto.org/man/mosquitto_pub-1.html)/[mosquitto_sub](https://mosquitto.org/man/mosquitto_sub-1.html).  
 You can use docker-compose also, use "[MQTT-Client](https://github.com/Tob1asDocker/Collection/blob/master/examples_docker-compose/mqtt-client.yml)"-example.
 * [MQTT-CLI](https://github.com/hivemq/mqtt-cli) from HiveMQ
-* [MQTT.fx](https://mqttfx.jensd.de/index.php/download) Version 1.7.1
+* [MQTT.fx](https://mqttfx.jensd.de/index.php/download) Version: [1.7.1](http://www.jensd.de/apps/mqttfx/1.7.1/)
 * [MQTT-Explorer](https://github.com/thomasnordquist/MQTT-Explorer)
 
 ### This Image on
