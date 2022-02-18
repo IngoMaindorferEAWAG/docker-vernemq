@@ -47,7 +47,14 @@ VerneMQ is a MQTT message broker, developed in Erlang.
 
 ### Example
 
-see example-folder!
+For docker-compose see [example-folder](example/)!  
+  
+Clients for publishing/subscribing:
+* mosquitto-clients: [mosquitto_pub](https://mosquitto.org/man/mosquitto_pub-1.html)/[mosquitto_sub](https://mosquitto.org/man/mosquitto_sub-1.html).  
+You can use docker-compose also, use "[MQTT-Client](https://github.com/Tob1asDocker/Collection/blob/master/examples_docker-compose/mqtt-client.yml)"-example.
+* [MQTT-CLI](https://github.com/hivemq/mqtt-cli) from HiveMQ
+* [MQTT.fx](https://mqttfx.jensd.de/index.php/download) Version 1.7.1
+* [MQTT-Explorer](https://github.com/thomasnordquist/MQTT-Explorer)
 
 ### This Image on
 * [DockerHub](https://hub.docker.com/r/tobi312/vernemq)

@@ -15,6 +15,7 @@ services:
   #   * ./vernemq-config/vmq.passwd with example users and password=passw0rd 
   # * https://github.com/vernemq/vernemq/issues/1594#issuecomment-671370692
   # fix permission problem before startup: "mkdir ./vernemq-data && chmod 777 ./vernemq-data"
+  # after start you can check generated config in folder ./vernemq-data/generated.configs/
   # Version tested: 1.12.3
   vernemq:
     image: vernemq/vernemq:latest-alpine   # Supported architectures: amd64
