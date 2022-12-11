@@ -5,7 +5,7 @@ services:
   # https://vernemq.com/
   # https://github.com/vernemq/vernemq
   # https://github.com/vernemq/docker-vernemq
-  # https://github.com/Tob1asDocker/docker-vernemq
+  # https://github.com/Tob1as/docker-vernemq
   # Help:
   # * https://docs.vernemq.com/
   # * https://github.com/vernemq/docker-vernemq#vernemq-configuration

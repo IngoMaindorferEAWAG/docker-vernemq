@@ -16,8 +16,8 @@ VerneMQ is a MQTT message broker, developed in Erlang.
 ### Images / Build
 
 * https://github.com/Tob1asDocker/docker-vernemq/pkgs/container/docker-vernemq
-  * `docker pull ghcr.io/tob1asdocker/docker-vernemq:latest-alpine` | `:VERSION-alpine` (AlpineLinux)
-  * `docker pull ghcr.io/tob1asdocker/docker-vernemq:latest` | `:VERSION` (Debian)
+  * `docker pull ghcr.io/tob1as/docker-vernemq:latest-alpine` | `:VERSION-alpine` (AlpineLinux)
+  * `docker pull ghcr.io/tob1as/docker-vernemq:latest` | `:VERSION` (Debian)
 * https://hub.docker.com/r/tobi312/vernemq
   * `docker pull tobi312/vernemq:latest-alpine` | `:VERSION-alpine` (AlpineLinux)
   * `docker pull tobi312/vernemq:latest` | `:VERSION` (Debian)
@@ -35,7 +35,7 @@ VerneMQ is a MQTT message broker, developed in Erlang.
     services:
       vernemq:
         build: 
-          context: https://github.com/Tob1asDocker/docker-vernemq/raw/main/vernemq.alpine.Dockerfile
+          context: https://github.com/Tob1as/docker-vernemq/raw/main/vernemq.alpine.Dockerfile
           args:
             VERNEMQ_VERSION: "1.12.3"
         image: local/vernemq:latest-alpine
@@ -58,4 +58,4 @@ You can use docker-compose also, use "[MQTT-Client](https://github.com/Tob1asDoc
 
 ### This Image on
 * [DockerHub](https://hub.docker.com/r/tobi312/vernemq)
-* [GitHub](https://github.com/Tob1asDocker/docker-vernemq)
+* [GitHub](https://github.com/Tob1as/docker-vernemq)
