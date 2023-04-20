@@ -1,4 +1,4 @@
-ARG VERNEMQ_VERSION="1.12.3"
+ARG VERNEMQ_VERSION="1.12.6.2"
 
 ## build-env ##
 
@@ -18,9 +18,10 @@ RUN apk --no-cache --update --available upgrade && \
     && \
     git clone -b $VERNEMQ_VERSION https://github.com/vernemq/vernemq.git .
 	
-RUN wget https://github.com/vernemq/docker-vernemq/raw/$VERNEMQ_VERSION/bin/build.sh -O build.sh && \
-    wget https://github.com/vernemq/docker-vernemq/raw/$VERNEMQ_VERSION/bin/vernemq.sh -O vernemq.sh && \
-    wget https://github.com/vernemq/docker-vernemq/raw/$VERNEMQ_VERSION/files/vm.args -O vm.args && \
+#    https://raw.githubusercontent.com/vernemq/docker-vernemq/master/bin/build.sh
+RUN wget https://raw.githubusercontent.com/vernemq/docker-vernemq/master/bin/build.sh -O build.sh && \
+    wget https://raw.githubusercontent.com/vernemq/docker-vernemq/master/bin/vernemq.sh -O vernemq.sh && \
+    wget https://raw.githubusercontent.com/vernemq/docker-vernemq/master/files/vm.args -O vm.args && \
     chmod +x build.sh && \
     chmod +x vernemq.sh
 
